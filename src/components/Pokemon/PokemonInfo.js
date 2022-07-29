@@ -164,8 +164,8 @@ const pokemonTypes = {
 
     render(){
     return(<div>
-            <Container style={{paddingBottom: '20px', display:'flex', justifyContent:'center'}}>
-                <div className="card" style={{width:'800px'}}>
+            <Container style={{ display:'flex', justifyContent:'center'}}>
+                <div className="card" style={{width:'800px', marginBottom:'10px'}}>
                     <div className='card-header'>
                         <Row>
                             <Col>

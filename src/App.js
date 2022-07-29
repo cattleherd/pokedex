@@ -13,9 +13,9 @@ import {
 function App() {
   return (
     <BrowserRouter>
-    <div className="App" style={{ backgroundImage: `url(${backgroundImage})`, height:'100vh' }}>
+    <div className="App" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Navbar />
-        <div className='container'>
+        <div className='container' style={{ height: '100vh'}}>
         <Routes>
           <Route path="/" element = { <Dashboard/> }/>
           {/*now index is accessible using this.props.params.index, react paramater used in routing*/}
