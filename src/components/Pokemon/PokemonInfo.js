@@ -5,6 +5,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import styled from 'styled-components';
+import spinner from './assets/spinner.gif'
+
+
+const Gif = styled.img`
+    height: '10rem', 
+    width:'10rem'
+`;
 
 
 const pokemonTypes = {
@@ -31,9 +39,10 @@ const pokemonTypes = {
 
  class PokemonInfo extends Component {
     state = {
+        isLoading:true,
+        tooManyRequests:false,
         name: '',
         Index: '',
-        imageUrl: '',
         types: [],
         statTitleWidth: 3,
         statBarWidth: 9,
@@ -95,6 +104,8 @@ const pokemonTypes = {
             case '555':
                 name = 'darmanitan';
                 break;
+            default:
+                break;
         }
         const imageUrl = `https://projectpokemon.org/images/normal-sprite/${name}.gif`;
         const types = res.data.types.map((e) => e.type.name);
@@ -153,8 +164,8 @@ const pokemonTypes = {
 
     render(){
     return(<div>
-            <Container style={{paddingBottom: '30vh'}}>
-                <div className="card">
+            <Container style={{paddingBottom: '20px', display:'flex', justifyContent:'center'}}>
+                <div className="card" style={{width:'800px'}}>
                     <div className='card-header'>
                         <Row>
                             <Col>
@@ -170,8 +181,14 @@ const pokemonTypes = {
                     <div className='card-body mt-5'>
                     {/*I wrapped this section in a row, making the h4 elements from top to bottom*/}
                         <Row>
-                            <div className='col-md-3 d-inline-block d-flex align-items-center justify-content-center'>
-                              <img class="card-img-top mx-5" src={this.state.imageUrl} style={{height: '10rem', width:'10rem'}} alt="Card image cap"/>
+                            <div id='sprite' className='col-md-3 d-inline-block d-flex align-items-center justify-content-center'>
+                              <Gif class="card-img-top mx-5" src={this.state.imageUrl} alt='pokemon pic'
+                              onLoad = {()=>this.setState({isLoading:false})}
+                              onError={()=>{this.setState({tooManyRequests:true})}}
+                              style = {this.state.isLoading || this.state.tooManyRequests ? {display:'none'} : {display: 'block'} 
+                              }
+                              />
+                              {this.state.isLoading || this.state.tooManyRequests ? (<img src={spinner} style={{height:'5rem', width: '5rem', alignSelf: 'center'}}  />) : (null)} {/*spinner which is displayed when image is loading*/}
                             </div>
                             <div className='col-md-9 d-inline-block' >
                                 <h3>{this.state.name}</h3>
@@ -283,14 +300,11 @@ const pokemonTypes = {
     }
 }
 
-//holy fucking shit. React-router-dom v6 changed a lot of things, and they really want you to use hooks to grab the params from the url.
-//Hooks are only used in functional components, so I found a solution online to wrap the hook in a function (useParams)
-//then the params is passed as a prop
-//componentDidMount is rendered after everything else so it grabs the Index from props.
+//omfg. React-router-dom v6 changed a lot of things, and they really want you to use hooks to grab the params from the url.
 export default (props) => (
             <PokemonInfo
             {...props}
-                params={useParams()}
+            params={useParams()}           
             />
         );
 

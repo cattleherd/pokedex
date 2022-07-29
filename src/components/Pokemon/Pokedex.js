@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Pokemon from './Pokemon.js'
 import axios from 'axios'
+import spinner from './assets/loading.gif'
+
 
 
 export default class Pokedex extends Component {
@@ -49,9 +51,9 @@ export default class Pokedex extends Component {
                            }
                     </div>) 
                     : 
-                    (<h1>
-                        Loading
-                    </h1>) 
+                    (<div style={{display:'flex', justifyContent:'center', alignItems:'center', width:'100vw', height:'100vh'}}>
+                        <img src={spinner} />
+                    </div>) 
                 }
             </div>
         );

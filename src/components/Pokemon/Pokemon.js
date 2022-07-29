@@ -55,13 +55,10 @@ export default class Pokemon extends Component {
                         onError = {()=> this.setState({tooManyRequests: true})}
                         style = {
                         //this is the logic to determine whether to display spinner or the pokemon sprite
-                                    this.state.imageLoading ? {display:'none'} : 
-                                    this.state.tooManyRequests ? {display:'none'} : {display: 'block'}
+                                    this.state.imageLoading || this.state.tooManyRequests ? {display:'none'} : {display: 'block'}
                         }
                     />
-                    {this.state.imageLoading ? (<img src={spinner} style={{height:'5rem', width: '5rem', alignSelf: 'center'}}  />) : (null)} {/*spinner which is displayed when image is loading*/}
-                    {this.state.tooManyRequests ? (<img src={spinner} style={{height:'5rem', width: '5rem', alignSelf: 'center'}}  />) : (null)} {/*spinner which is displayed when image is loading*/} 
-
+                    {this.state.imageLoading || this.state.tooManyRequests ? (<img src={spinner} style={{height:'5rem', width: '5rem', alignSelf: 'center'}}  />) : (null)} {/*spinner which is displayed when image is loading*/}
                 <div className='card-body mx-auto'>
                     <h5 className="card-title text-center" >{this.state.name}</h5>
                     {this.state.tooManyRequests ? (
