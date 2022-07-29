@@ -13,7 +13,7 @@ import {
 function App() {
   return (
     <BrowserRouter>
-    <div className="App" style={{ backgroundImage: `url(${backgroundImage})`, height:'auto' }}>
+    <div className="App" style={{ backgroundImage: `url(${backgroundImage})`, height:'screen' }}>
       <Navbar />
         <div className='container'>
         <Routes>
