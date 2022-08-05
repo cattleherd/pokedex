@@ -5,9 +5,9 @@ export default class Navbar extends Component{
 render(){
     return(
         <div>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
                <Link to="/" >
-                    <a class="navbar-brand">Pokedex</a>            
+                    <span className="navbar-brand">Pokedex</span>            
                 </Link>
             </nav>
         </div>

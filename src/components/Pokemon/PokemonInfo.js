@@ -173,7 +173,7 @@ const pokemonTypes = {
                             </Col>
                             <Col>
                                 {this.state.types.map((e)=>{
-                                    return <span className='badge mx-2' style={{color: 'white', background:`#${pokemonTypes[e]}`  , borderRadius: '20px', float:'right'}}>{e}</span>;
+                                    return <span key={e.toString()} className='badge mx-2' style={{color: 'white', background:`#${pokemonTypes[e]}`  , borderRadius: '20px', float:'right'}}>{e}</span>;
                                 })}
                             </Col>
                         </Row>
@@ -182,13 +182,13 @@ const pokemonTypes = {
                     {/*I wrapped this section in a row, making the h4 elements from top to bottom*/}
                         <Row>
                             <div id='sprite' className='col-md-3 d-inline-block d-flex align-items-center justify-content-center'>
-                              <Gif class="card-img-top mx-5" src={this.state.imageUrl} alt='pokemon pic'
+                              <Gif className="card-img-top mx-5" src={this.state.imageUrl} alt=''
                               onLoad = {()=>this.setState({isLoading:false})}
                               onError={()=>{this.setState({tooManyRequests:true})}}
                               style = {this.state.isLoading || this.state.tooManyRequests ? {display:'none'} : {display: 'block'} 
                               }
                               />
-                              {this.state.isLoading || this.state.tooManyRequests ? (<img src={spinner} style={{height:'5rem', width: '5rem', alignSelf: 'center'}}  />) : (null)} {/*spinner which is displayed when image is loading*/}
+                              {this.state.isLoading || this.state.tooManyRequests ? (<img alt='' src={spinner} style={{height:'5rem', width: '5rem', alignSelf: 'center'}}  />) : (null)} {/*spinner which is displayed when image is loading*/}
                             </div>
                             <div className='col-md-9 d-inline-block' >
                                 <h3>{this.state.name}</h3>
@@ -239,7 +239,7 @@ const pokemonTypes = {
                                         </Col>
                                         <Col>
                                         {/*When looping over the state, since its loaded async you need to check if it first exists, then you can map its contents. Also, added a condition to add commas between the elements*/}
-                                            {this.state.abilities.length && this.state.abilities.map((e,i,arr) => {return <span>{e}{i!=arr.length-1 ? ', ' : ''}</span>;})}
+                                            {this.state.abilities.length && this.state.abilities.map((e,i,arr) => {return <span key={e.toString()}>{e}{i!==arr.length-1 ? ', ' : ''}</span>;})}
                                         </Col>
                                         </Row>
                                     </Col>
@@ -273,7 +273,7 @@ const pokemonTypes = {
                                             <span style={{float:'right'}}>Egg Groups</span>
                                         </Col>
                                         <Col>
-                                            {this.state.eggGroups.length && this.state.eggGroups.map((e,i,arr) => {return <span>{e}{i!=arr.length-1 ? ', ' : ''}</span>;})}
+                                            {this.state.eggGroups.length && this.state.eggGroups.map((e,i,arr) => {return <span key={e.toString()}>{e}{i!==arr.length-1 ? ', ' : ''}</span>;})}
                                         </Col>
                                         </Row>
                                     </Col>
